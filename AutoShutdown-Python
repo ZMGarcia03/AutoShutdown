@@ -1,0 +1,34 @@
+import os
+import platform
+import time
+
+def shutdown_pc(minutes):
+    try:
+        if platform.system() == "Windows":
+            os.system(f'shutdown /s /t {minutes * 60}')
+        elif platform.system() == "Linux" or platform.system() == "Darwin":
+            os.system(f'shutdown -h +{minutes}')
+        else:
+            print("Unsupported operating system.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+def main():
+    print("Automatic PC Shutdown Program")
+    print("-----------------------------")
+    try:
+        minutes = int(input("Enter the number of minutes after which you want to shutdown your PC: "))
+        if minutes <= 0:
+            print("Please enter a valid positive integer.")
+            return
+
+        print(f"Your PC will be shut down after {minutes} minutes.")
+        time.sleep(1)
+
+        shutdown_pc(minutes)
+
+    except ValueError:
+        print("Invalid input. Please enter a valid number of minutes.")
+
+if __name__ == "__main__":
+    main()
